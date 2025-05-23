@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mensaje Especial</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to top, #ff6f61, #ffcc70, #fbeec1);
+      animation: skyChange 20s ease-in-out infinite alternate;
+      position: relative;
+    }
+
+    @keyframes skyChange {
+      0% {
+        background: linear-gradient(to top, #ff6f61, #ffcc70, #fbeec1);
+      }
+      100% {
+        background: linear-gradient(to top, #1e1f26, #413c58, #a29bb1);
+      }
+    }
+
+    .sun {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, #ffdd59, #ff9f1a);
+      border-radius: 50%;
+      animation: sunMove 20s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes sunMove {
+      0% { bottom: 0; opacity: 1; }
+      100% { bottom: 60%; opacity: 0.2; }
+    }
+
+    .cloud {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: cloudMove 60s linear infinite;
+      z-index: 2;
+    }
+
+    .cloud1 { width: 100px; height: 60px; top: 20%; left: -120px; animation-delay: 0s; }
+    .cloud2 { width: 140px; height: 80px; top: 30%; left: -150px; animation-delay: 15s; }
+
+    @keyframes cloudMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(120vw); }
+    }
+
+    .mensaje {
+      position: relative;
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      font-size: 1.6rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      max-width: 80%;
+      margin: auto;
+      top: 40%;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 2rem;
+      animation: float 6s linear infinite;
+      z-index: 3;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: waveAnim 10s ease-in-out infinite;
+      transform: translateY(50%);
+      z-index: 1;
+    }
+
+    @keyframes waveAnim {
+      0%, 100% { transform: translateX(0) translateY(50%); }
+      50% { transform: translateX(-25%) translateY(50%); }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0;
+      animation: starsFade 20s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes starsFade {
+      0% { opacity: 0; }
+      100% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sun"></div>
+  <div class="stars"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="wave"></div>
+
+  <div class="mensaje" id="mensaje"></div>
+
+  <script>
+    const texto = "Quiero que sepas, pase lo que pase, siempre te voy a amar 💗✨ y que siempre vas a estar en mi corazoncito de pollo 😼💝";
+    const contenedor = document.getElementById('mensaje');
+    let index = 0;
+
+    function escribirTexto() {
+      if (index < texto.length) {
+        contenedor.innerHTML += texto.charAt(index);
+        index++;
+        setTimeout(escribirTexto, 50);
+      }
+    }
+
+    escribirTexto();
+
+    // Corazones flotando
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 1.5 + 1) + "rem";
+      heart.innerText = "💖";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }, 500);
+  </script>
+</body>
+</html>
